@@ -34,7 +34,7 @@ export const StatsGrid = () => {
                 <StatCard title="Avg. Monthly" value="₹1.15L" trend="+2.4%" icon={TrendingUp} color="bg-orange-500" />
             </div>
             <div className="flex justify-end px-6 opacity-[0.08]">
-                <p className="text-[7px] font-black text-zinc-500 tracking-[0.6em] uppercase">System Architecture: Divya Ojha</p>
+                <p className="text-[7px] font-black text-zinc-500 tracking-[0.6em] uppercase"></p>
             </div>
         </div>
     );
