@@ -48,7 +48,7 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                 </div>
 
                 <nav className="flex-1 space-y-2 overflow-y-auto no-scrollbar">
-                    <SidebarItem icon={LayoutDashboard} label="OVERVIEW" active={currentView === 'OVERVIEW'} onClick={() => setView('OVERVIEW')} />
+                    <SidebarItem icon={LayoutDashboard} label="Music Label / Artist" active={currentView === 'OVERVIEW'} onClick={() => setView('OVERVIEW')} />
                     <SidebarItem icon={Music} label="REPERTOIRE" active={currentView === 'SONGS'} onClick={() => setView('SONGS')} />
                     <SidebarItem icon={Upload} label="WORKSPACE" active={currentView === 'WORKSPACE'} onClick={() => setView('WORKSPACE')} />
                     <SidebarItem icon={FileText} label="RESOURCES" active={currentView === 'RESOURCES'} onClick={() => setView('RESOURCES')} />
