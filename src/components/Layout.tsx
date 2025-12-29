@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import {
     LayoutDashboard, Music, CreditCard, MessageCircle, LogOut,
-    Search, CheckCircle2, Upload, FileBarChart, ChevronDown, FileText
+    Search, CheckCircle2, Upload, FileBarChart, ChevronDown, FileText, Moon
 } from 'lucide-react';
 
 interface LayoutProps {
@@ -11,7 +11,6 @@ interface LayoutProps {
     onLogout: () => void;
 }
 
-// --- Sub-component for Sidebar Items (Fixed Colors) ---
 const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
     <button
         onClick={onClick}
@@ -29,8 +28,13 @@ const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
 export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps) => {
     const [isReportsOpen, setIsReportsOpen] = useState(false);
 
+    // --- THEME SWITCHER LOGIC ---
+    const goToDarkTheme = () => {
+        // REPLACE with your actual Dark Theme Vercel URL
+        window.location.href = "https://ott-dashboard-demo.vercel.app";
+    };
+
     return (
-        /* Change: Global background is now Slate-50 and base text is Slate-900 */
         <div className="flex min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-indigo-100">
 
             {/* --- SIDEBAR --- */}
@@ -95,15 +99,24 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                     <SidebarItem icon={MessageCircle} label="SUPPORT" active={currentView === 'SUPPORT'} onClick={() => setView('SUPPORT')} />
                 </nav>
 
-                <div className="pt-8 border-t border-slate-100">
+                {/* THEME TOGGLE BUTTON */}
+                <div className="pt-4 pb-2">
+                    <button
+                        onClick={goToDarkTheme}
+                        className="w-full flex items-center gap-4 px-6 py-4 rounded-2xl bg-slate-900 text-white hover:bg-black transition-all shadow-xl shadow-slate-200 active:scale-95 group"
+                    >
+                        <Moon size={18} className="group-hover:rotate-12 transition-transform" />
+                        <span className="text-[10px] font-black tracking-[0.2em] uppercase">Dark Theme</span>
+                    </button>
+                </div>
+
+                <div className="pt-4 border-t border-slate-100">
                     <SidebarItem icon={LogOut} label="LOGOUT" onClick={onLogout} />
                 </div>
             </aside>
 
             {/* --- MAIN CONTENT --- */}
             <main className="flex-1 ml-72 p-12 max-w-7xl mx-auto w-full relative">
-
-                {/* Fixed Header: White background, Slate text */}
                 <header className="flex justify-between items-center mb-12 bg-white p-8 rounded-[3rem] border border-slate-200 shadow-sm">
                     <div className="flex items-center gap-6">
                         <div className="relative w-20 h-20 rounded-full bg-slate-50 border-4 border-white shadow-xl flex items-center justify-center overflow-hidden">
@@ -120,7 +133,6 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                     </div>
 
                     <div className="flex gap-4 items-center">
-                        {/* Search Input: bg-slate-50 and text-slate-900 */}
                         <div className="bg-slate-50 hidden lg:flex items-center px-6 py-3 rounded-2xl border border-slate-200 focus-within:border-indigo-500 transition-all">
                             <Search size={18} className="text-slate-400 mr-3" />
                             <input
@@ -137,7 +149,6 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                     </div>
                 </header>
 
-                {/* This is where your StatsGrid and SongCatalog appear */}
                 <div className="animate-in fade-in duration-700">
                     {children}
                 </div>
