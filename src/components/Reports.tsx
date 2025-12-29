@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-    Download, Music, User, Disc, FileSpreadsheet,
-    Smartphone, TrendingUp, ChevronRight,
-    Filter
-} from 'lucide-react';
-import {
-    BarChart, Bar, XAxis, YAxis, CartesianGrid,
-    Tooltip, ResponsiveContainer
-} from 'recharts';
+import { Download, Music, User, Disc, TrendingUp, Filter } from 'lucide-react';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { SONGS } from '../data/songs.ts';
 
 const CRBT_DATA = [
@@ -19,25 +12,24 @@ const CRBT_DATA = [
 
 export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
     return (
-        <div className="animate-in fade-in slide-in-from-bottom-10 duration-1000 space-y-10 pb-20">
-
+        <div className="space-y-10 pb-20 animate-in fade-in slide-in-from-bottom-4 duration-700">
             {/* HEADER SECTION */}
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 px-2">
                 <div>
                     <div className="flex items-center gap-2 mb-2">
-                        <div className="h-[1px] w-8 bg-indigo-500"></div>
-                        <span className="text-[10px] font-black text-indigo-500 tracking-[0.4em] uppercase">Intelligence Suite</span>
+                        <div className="h-[1px] w-8 bg-indigo-600"></div>
+                        <span className="text-[10px] font-black text-indigo-600 tracking-[0.4em] uppercase">Intelligence Suite</span>
                     </div>
-                    <h2 className="text-5xl font-black text-white tracking-tighter uppercase italic leading-none">
-                        {type === 'CRBT' ? 'Operator' : 'DSP'} <span className="text-zinc-700">Analytics</span>
+                    <h2 className="text-5xl font-black text-slate-900 tracking-tighter uppercase italic leading-none">
+                        {type === 'CRBT' ? 'Operator' : 'DSP'} <span className="text-slate-300">Analytics</span>
                     </h2>
                 </div>
 
                 <div className="flex gap-3">
-                    <button className="glass border border-white/5 px-6 py-4 rounded-2xl text-[10px] font-black text-zinc-400 tracking-widest hover:bg-white/5 transition-all flex items-center gap-2">
+                    <button className="bg-white border border-slate-200 px-6 py-4 rounded-2xl text-[10px] font-black text-slate-500 tracking-widest hover:bg-slate-50 transition-all flex items-center gap-2 shadow-sm">
                         <Filter size={14} /> FILTERS
                     </button>
-                    <button className="bg-indigo-600 text-white px-8 py-4 rounded-2xl font-black text-[10px] tracking-widest flex items-center gap-3 hover:bg-indigo-500 transition-all shadow-2xl shadow-indigo-600/20 active:scale-95">
+                    <button className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-black text-[10px] tracking-widest flex items-center gap-3 hover:bg-black transition-all shadow-xl shadow-slate-200 active:scale-95">
                         <Download size={16} /> EXPORT {type} REPORT
                     </button>
                 </div>
@@ -52,38 +44,30 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
             </div>
 
             {type === 'CRBT' ? (
-                /* --- CRBT VIEW --- */
-                <div className="glass p-10 rounded-[3.5rem] border border-white/5 relative overflow-hidden group">
-                    <div className="absolute top-0 right-0 p-10 opacity-10 group-hover:opacity-20 transition-opacity">
-                        <Smartphone size={120} className="rotate-12 text-white" />
-                    </div>
-
+                /* OPERATOR VIEW */
+                <div className="bg-white p-10 rounded-[3.5rem] border border-slate-200 relative overflow-hidden group shadow-xl shadow-slate-200/50">
                     <div className="flex items-center justify-between mb-12">
-                        <h3 className="text-xl font-black text-white tracking-tighter uppercase italic flex items-center gap-3">
-                            <TrendingUp className="text-indigo-500" /> Revenue vs Operator Split
+                        <h3 className="text-xl font-black text-slate-900 tracking-tighter uppercase italic flex items-center gap-3">
+                            <TrendingUp className="text-indigo-600" /> Revenue vs Operator Split
                         </h3>
-                        <div className="flex gap-4 text-[9px] font-black tracking-widest">
-                            <span className="flex items-center gap-1.5 text-indigo-500"><div className="w-2 h-2 rounded-full bg-indigo-500"/> JIO</span>
-                            <span className="flex items-center gap-1.5 text-red-500"><div className="w-2 h-2 rounded-full bg-red-500"/> AIRTEL</span>
-                            <span className="flex items-center gap-1.5 text-yellow-500"><div className="w-2 h-2 rounded-full bg-yellow-500"/> VI</span>
-                        </div>
                     </div>
 
                     <div className="h-[450px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <BarChart data={CRBT_DATA} barGap={12}>
-                                <CartesianGrid strokeDasharray="0 0" stroke="#ffffff03" vertical={false} />
-                                <XAxis dataKey="name" stroke="#3f3f46" fontSize={10} tick={{fontWeight: '900'}} axisLine={false} tickLine={false} dy={20} />
+                                <CartesianGrid strokeDasharray="0 0" stroke="#f1f5f9" vertical={false} />
+                                <XAxis dataKey="name" stroke="#94a3b8" fontSize={10} tick={{fontWeight: '900'}} axisLine={false} tickLine={false} dy={20} />
+                                <YAxis stroke="#94a3b8" fontSize={10} tick={{fontWeight: '900'}} axisLine={false} tickLine={false} />
                                 <Tooltip
-                                    cursor={{fill: 'rgba(255,255,255,0.03)'}}
+                                    cursor={{fill: '#f8fafc'}}
                                     content={({ active, payload }) => {
                                         if (active && payload) return (
-                                            <div className="glass border border-white/10 p-4 rounded-2xl shadow-2xl backdrop-blur-xl">
-                                                <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-3 border-b border-white/5 pb-2">{payload[0].payload.name}</p>
+                                            <div className="bg-white border border-slate-200 p-4 rounded-2xl shadow-2xl">
+                                                <p className="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 border-b border-slate-50 pb-2">{payload[0].payload.name}</p>
                                                 {payload.map((p, i) => (
                                                     <div key={i} className="flex justify-between gap-8 py-1">
-                                                        <span className="text-[9px] font-bold text-zinc-400 uppercase">{p.name}</span>
-                                                        <span className="text-[10px] font-black text-white">₹{p.value?.toLocaleString()}</span>
+                                                        <span className="text-[9px] font-bold text-slate-500 uppercase">{p.name}</span>
+                                                        <span className="text-[10px] font-black text-slate-900">₹{p.value?.toLocaleString()}</span>
                                                     </div>
                                                 ))}
                                             </div>
@@ -99,30 +83,38 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
                     </div>
                 </div>
             ) : (
-                /* --- UPDATED DSP VIEW: SPACIOUS 2-COLUMN LAYOUT --- */
-                <div className="space-y-8">
-                    {/* Top Row: Trackwise (Full Width for maximum space) */}
+                /* DSP VIEW: RESTORED BENTO SECTIONS */
+                <div className="space-y-10">
+                    {/* FULL WIDTH: TOP TRACKS */}
                     <ReportBentoList
                         title="Top Track Performance"
                         icon={<Music size={24}/>}
-                        data={SONGS.slice(0, 8).map(s => ({label: s.title, val: s.revenue}))}
-                        color="indigo"
+                        data={SONGS.slice(0, 6).map(s => ({label: s.title, val: s.revenue}))}
                         fullWidth={true}
                     />
 
-                    {/* Bottom Row: Artists & Albums (Side by Side) */}
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+                        {/* ARTIST WISE */}
                         <ReportBentoList
-                            title="Artist Revenue"
+                            title="Artist Performance"
                             icon={<User size={24}/>}
-                            data={[{label: 'Rupankar Bagchi', val: '₹14.2L'}, {label: 'Anupam Roy', val: '₹8.4L'}, {label: 'Iman C', val: '₹2.1L'}]}
-                            color="emerald"
+                            data={[
+                                {label: 'Ishaan Mitra', val: '₹4.2L'},
+                                {label: 'Arijit Singh', val: '₹3.8L'},
+                                {label: 'Shreya Ghoshal', val: '₹2.9L'},
+                                {label: 'Anupam Roy', val: '₹2.1L'},
+                            ]}
                         />
+                        {/* ALBUM WISE */}
                         <ReportBentoList
-                            title="Album Collection"
+                            title="Album Rankings"
                             icon={<Disc size={24}/>}
-                            data={[{label: 'Studio Vol 1', val: '₹18.4L'}, {label: 'Summer Hits', val: '₹4.1L'}]}
-                            color="purple"
+                            data={[
+                                {label: 'Ke Jeno Dake (OST)', val: '₹8.4L'},
+                                {label: 'Bengali Folk Hits', val: '₹5.1L'},
+                                {label: 'Moner Thikana', val: '₹3.9L'},
+                                {label: 'Rainy Day Melodies', val: '₹2.2L'},
+                            ]}
                         />
                     </div>
                 </div>
@@ -132,134 +124,39 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
 };
 
 const StatCard = ({ label, value, growth }: any) => (
-    <div className="glass p-8 rounded-[2.5rem] border border-white/5 hover:border-indigo-500/20 transition-all">
-        <p className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.2em] mb-2">{label}</p>
+    <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:border-indigo-500/20 transition-all">
+        <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{label}</p>
         <div className="flex items-end justify-between">
-            <h4 className="text-3xl font-black text-white tracking-tighter">{value}</h4>
-            <span className="text-[10px] font-black text-emerald-500 bg-emerald-500/10 px-3 py-1.5 rounded-xl">{growth}</span>
+            <h4 className="text-3xl font-black text-slate-900 tracking-tighter">{value}</h4>
+            <span className={`text-[10px] font-black ${growth.includes('+') ? 'text-emerald-600 bg-emerald-50 border-emerald-100' : 'text-slate-500 bg-slate-50 border-slate-100'} px-3 py-1.5 rounded-xl border`}>
+                {growth}
+            </span>
         </div>
     </div>
 );
 
-const ReportBentoList = ({ title, icon, data, color, fullWidth = false }: any) => (
-    <div className={`glass p-10 rounded-[4rem] border border-white/5 flex flex-col min-h-[500px] hover:border-${color}-500/20 transition-all group overflow-hidden relative`}>
-        {/* Header Section */}
-        <div className="flex items-center justify-between mb-10">
-            <div className="flex items-center gap-5">
-                <div className={`p-4 rounded-[1.5rem] bg-${color}-500/10 text-${color}-400 shadow-inner`}>
-                    {icon}
-                </div>
-                <div>
-                    <h4 className="font-black text-2xl uppercase tracking-tighter text-white italic">{title}</h4>
-                    <p className="text-[10px] font-black text-zinc-500 tracking-widest uppercase mt-1">Net Earnings Breakdown</p>
-                </div>
+const ReportBentoList = ({ title, icon, data, fullWidth = false }: any) => (
+    <div className="bg-white p-10 rounded-[3.5rem] border border-slate-200 flex flex-col hover:shadow-xl hover:shadow-slate-200/50 transition-all group overflow-hidden relative shadow-sm">
+        <div className="flex items-center gap-5 mb-10">
+            <div className="p-4 rounded-2xl bg-indigo-50 text-indigo-600 border border-indigo-100">{icon}</div>
+            <div>
+                <h4 className="font-black text-2xl uppercase tracking-tighter text-slate-900 italic leading-none">{title}</h4>
+                <p className="text-[9px] text-slate-400 font-black tracking-widest uppercase mt-1">Net Performance Insights</p>
             </div>
-            <button className="p-3 bg-white/5 rounded-2xl text-zinc-500 hover:text-white transition-colors">
-                <FileSpreadsheet size={20}/>
-            </button>
         </div>
 
-        {/* Data List Section */}
-        <div className={`grid ${fullWidth ? 'grid-cols-1 md:grid-cols-2 gap-x-12' : 'grid-cols-1'} gap-y-4`}>
+        <div className={`grid ${fullWidth ? 'grid-cols-1 md:grid-cols-2 gap-x-8' : 'grid-cols-1'} gap-y-3`}>
             {data.map((item: any, i: number) => (
-                <div key={i} className="flex justify-between items-center p-6 bg-white/[0.02] rounded-[2rem] border border-white/5 hover:bg-white/[0.05] hover:border-white/10 transition-all group/item cursor-pointer">
-                    <div className="flex items-center gap-5">
-                        <div className="w-10 h-10 rounded-xl bg-zinc-900 border border-white/5 flex items-center justify-center text-xs font-black text-zinc-600 group-hover/item:text-indigo-400 group-hover/item:border-indigo-500/30 transition-all">
-                            {i < 9 ? `0${i + 1}` : i + 1}
-                        </div>
-                        <span className="text-white text-lg font-bold tracking-tight truncate w-48 group-hover/item:translate-x-1 transition-transform">{item.label}</span>
-                    </div>
+                <div key={i} className="flex justify-between items-center p-5 bg-slate-50 rounded-2xl border border-slate-100 hover:bg-white hover:border-indigo-200 hover:shadow-md transition-all group/item cursor-pointer">
                     <div className="flex items-center gap-4">
-                        <span className={`text-xl font-black italic ${i === 0 ? 'text-indigo-400' : 'text-white'}`}>
-                            {item.val}
-                        </span>
-                        <ChevronRight size={18} className="text-zinc-800 group-hover/item:text-white transition-colors" />
+                        <div className="w-8 h-8 rounded-lg bg-white border border-slate-200 flex items-center justify-center text-[10px] font-black text-slate-400 group-hover/item:bg-indigo-600 group-hover/item:text-white transition-colors">
+                            {i + 1}
+                        </div>
+                        <span className="text-slate-900 text-sm font-black tracking-tight uppercase italic">{item.label}</span>
                     </div>
+                    <span className="text-base font-black italic text-indigo-600 tracking-tighter">{item.val}</span>
                 </div>
             ))}
         </div>
-
-        {/* Footer Action */}
-        <button className="mt-10 w-full py-5 bg-white/5 rounded-[1.5rem] text-[10px] font-black text-zinc-500 tracking-[0.3em] hover:bg-white hover:text-black transition-all uppercase italic">
-            Download Comprehensive {title} Data
-        </button>
     </div>
 );
-
-// import React from 'react';
-// import { Download, Music, User, Disc, Smartphone, FileSpreadsheet } from 'lucide-react';
-// import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
-// import { SONGS } from '../data/songs.ts';
-//
-// const CRBT_DATA = [
-//     { name: 'Ke Jeno Dake', airtel: 45000, jio: 52000, vi: 21000 },
-//     { name: 'Tor Sathe', airtel: 38000, jio: 48000, vi: 18000 },
-//     { name: 'Tramline', airtel: 32000, jio: 41000, vi: 15000 },
-// ];
-//
-// export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
-//     return (
-//         <div className="animate-in slide-in-from-bottom-6 duration-700 space-y-10">
-//             <div className="flex justify-between items-end px-4">
-//                 <div>
-//                     <h2 className="text-4xl font-black text-white tracking-tighter uppercase italic">
-//                         {type === 'CRBT' ? 'Caller Tune Reports' : 'DSP Revenue Reports'}
-//                     </h2>
-//                     <p className="text-zinc-500 text-xs font-black tracking-[0.3em] uppercase mt-2">
-//                         {type === 'CRBT' ? 'Operator-wise VAS Analytics' : 'Digital Service Provider Breakdown'}
-//                     </p>
-//                 </div>
-//                 <button className="bg-white text-black px-6 py-3 rounded-2xl font-black text-[10px] tracking-widest flex items-center gap-2 hover:bg-indigo-500 hover:text-white transition-all">
-//                     <Download size={16} /> DOWNLOAD {type} SUMMARY
-//                 </button>
-//             </div>
-//
-//             {type === 'CRBT' ? (
-//                 /* CRBT SECTION */
-//                 <div className="glass p-10 rounded-[3rem] border border-white/5 h-[600px]">
-//                     <ResponsiveContainer width="100%" height="100%">
-//                         <BarChart data={CRBT_DATA}>
-//                             <CartesianGrid strokeDasharray="3 3" stroke="#ffffff05" vertical={false} />
-//                             <XAxis dataKey="name" stroke="#52525b" fontSize={10} tick={{fontWeight: 'bold'}} />
-//                             <Tooltip contentStyle={{ backgroundColor: '#09090b', borderRadius: '16px' }} />
-//                             <Legend />
-//                             <Bar dataKey="jio" stackId="a" fill="#6366f1" name="Reliance Jio" />
-//                             <Bar dataKey="airtel" stackId="a" fill="#ef4444" name="Airtel" />
-//                             <Bar dataKey="vi" stackId="a" fill="#eab308" name="VI (Vodafone Idea)" />
-//                         </BarChart>
-//                     </ResponsiveContainer>
-//                 </div>
-//             ) : (
-//                 /* DSP SECTION */
-//                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-//                     <ReportList title="Trackwise Revenue" icon={<Music size={18}/>} data={SONGS.map(s => ({label: s.title, val: s.revenue}))} />
-//                     <ReportList title="Artistwise Revenue" icon={<User size={18}/>} data={[{label: 'Primary Artist', val: '₹14.2L'}, {label: 'Featured', val: '₹2.1L'}]} />
-//                     <ReportList title="Albumwise Revenue" icon={<Disc size={18}/>} data={[{label: 'Studio Album Vol 1', val: '₹8.4L'}, {label: 'Singles 2024', val: '₹5.1L'}]} />
-//                 </div>
-//             )}
-//         </div>
-//     );
-// };
-//
-// const ReportList = ({ title, icon, data }: any) => (
-//     <div className="glass p-8 rounded-[2.5rem] border border-white/5 flex flex-col h-full">
-//         <div className="flex items-center justify-between mb-6">
-//             <div className="flex items-center gap-3 text-white">
-//                 {icon}
-//                 <h4 className="font-black text-sm uppercase tracking-tighter">{title}</h4>
-//             </div>
-//             <button className="text-zinc-600 hover:text-white transition-colors"><FileSpreadsheet size={18}/></button>
-//         </div>
-//         <div className="space-y-4 flex-grow">
-//             {data.map((item: any, i: number) => (
-//                 <div key={i} className="flex justify-between items-center p-4 bg-white/[0.02] rounded-2xl border border-white/5">
-//                     <span className="text-zinc-400 text-xs font-bold truncate w-2/3">{item.label}</span>
-//                     <span className="text-white font-black text-xs">{item.val}</span>
-//                 </div>
-//             ))}
-//         </div>
-//         <button className="mt-6 w-full py-3 bg-white/5 border border-white/10 rounded-xl text-[9px] font-black text-zinc-500 uppercase tracking-widest hover:bg-white hover:text-black transition-all">
-//             Export {title.split(' ')[0]}
-//         </button>
-//     </div>
-// );

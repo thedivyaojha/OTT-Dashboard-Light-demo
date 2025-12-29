@@ -27,27 +27,21 @@ const DATA_SETS = {
 export const RevenueChart = () => {
     const [timeRange, setTimeRange] = useState<keyof typeof DATA_SETS>("6M");
 
-    // @ts-ignore
     return (
-        <div className="bg-zinc-900 border border-zinc-800 p-8 rounded-[3rem] mt-8 relative overflow-hidden group">
-            {/* Extremely Subtle Creator Stamp - Visible only on hover */}
-            <div className="absolute top-4 right-8 opacity-0 group-hover:opacity-10 transition-opacity pointer-events-none">
-                <span className="text-white text-[8px] font-black uppercase tracking-[0.5em]"></span>
-            </div>
-
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
+        <div className="bg-white border border-slate-200 p-8 rounded-[3rem] mt-8 relative shadow-xl shadow-slate-200/50">
+            <div className="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
                 <div>
-                    <h3 className="text-2xl font-black text-white tracking-tighter uppercase italic">Revenue Trend</h3>
-                    <p className="text-zinc-500 text-[10px] font-black uppercase tracking-widest mt-1">Showing period: {timeRange}</p>
+                    <h3 className="text-2xl font-black text-slate-900 tracking-tighter uppercase italic">Revenue Trend</h3>
+                    <p className="text-slate-400 text-[10px] font-black uppercase tracking-widest mt-1">Showing period: {timeRange}</p>
                 </div>
 
-                <div className="flex bg-zinc-800/50 p-1.5 rounded-2xl border border-white/5">
+                <div className="flex bg-slate-50 p-1.5 rounded-2xl border border-slate-200">
                     {(["6M", "1Y", "5Y"] as const).map((range) => (
                         <button
                             key={range}
                             onClick={() => setTimeRange(range)}
-                            className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase tracking-widest transition-all ${
-                                timeRange === range ? 'bg-indigo-600 text-white shadow-lg' : 'text-zinc-500 hover:text-zinc-200'
+                            className={`px-6 py-2 rounded-xl text-[10px] font-black uppercase transition-all ${
+                                timeRange === range ? 'bg-indigo-600 text-white shadow-lg' : 'text-slate-400 hover:text-slate-900'
                             }`}
                         >
                             {range}
@@ -61,25 +55,16 @@ export const RevenueChart = () => {
                     <AreaChart data={DATA_SETS[timeRange]}>
                         <defs>
                             <linearGradient id="colorRev" x1="0" y1="0" x2="0" y2="1">
-                                <stop offset="5%" stopColor="#6366f1" stopOpacity={0.3}/>
+                                <stop offset="5%" stopColor="#6366f1" stopOpacity={0.2}/>
                                 <stop offset="95%" stopColor="#6366f1" stopOpacity={0}/>
                             </linearGradient>
                         </defs>
-                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#27272a" />
-                        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#71717a', fontSize: 10, fontWeight: 'bold'}} dy={10} />
-                        <YAxis
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{fill: '#71717a', fontSize: 10, fontWeight: 'bold'}}
-                            tickFormatter={(val) => val >= 100000 ? `₹${(val/100000).toFixed(1)}L` : `₹${(val/1000).toFixed(0)}K`}
-                        />
-                        // ... (imports and DATA_SETS stay the same)
-
+                        <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#f1f5f9" />
+                        <XAxis dataKey="month" axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 10, fontWeight: 'bold'}} dy={10} />
+                        <YAxis axisLine={false} tickLine={false} tick={{fill: '#94a3b8', fontSize: 10, fontWeight: 'bold'}} />
                         <Tooltip
-                            contentStyle={{ backgroundColor: '#09090b', border: '1px solid #27272a', borderRadius: '16px' }}
-                            itemStyle={{ color: '#fff', fontSize: '12px', fontWeight: 'bold' }}
-                            // Fixed type: returns a simple string array that Recharts expects
-                            formatter={(value: number) => [`₹${value.toLocaleString('en-IN')}`, 'Revenue']}
+                            contentStyle={{ backgroundColor: '#ffffff', border: '1px solid #e2e8f0', borderRadius: '16px' }}
+                            itemStyle={{ color: '#0f172a', fontSize: '12px', fontWeight: 'bold' }}
                         />
                         <Area type="monotone" dataKey="revenue" stroke="#6366f1" strokeWidth={4} fill="url(#colorRev)" />
                     </AreaChart>
