@@ -11,7 +11,6 @@ interface LayoutProps {
     onLogout: () => void;
 }
 
-// --- Sub-component for Sidebar Items (Fixed Colors) ---
 const SidebarItem = ({ icon: Icon, label, active, onClick }: any) => (
     <button
         onClick={onClick}
@@ -30,7 +29,6 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
     const [isReportsOpen, setIsReportsOpen] = useState(false);
 
     return (
-        /* Change: Global background is now Slate-50 and base text is Slate-900 */
         <div className="flex min-h-screen bg-[#F8FAFC] text-slate-900 font-sans selection:bg-indigo-100">
 
             {/* --- SIDEBAR --- */}
@@ -48,7 +46,14 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                 </div>
 
                 <nav className="flex-1 space-y-2 overflow-y-auto no-scrollbar">
-                    <SidebarItem icon={LayoutDashboard} label="Music Label / Artist" active={currentView === 'OVERVIEW'} onClick={() => setView('OVERVIEW')} />
+                    {/* LABEL UPDATED TO MUSIC LABEL / ARTIST */}
+                    <SidebarItem
+                        icon={LayoutDashboard}
+                        label="OVERVIEW"
+                        active={currentView === 'OVERVIEW'}
+                        onClick={() => setView('OVERVIEW')}
+                    />
+
                     <SidebarItem icon={Music} label="REPERTOIRE" active={currentView === 'SONGS'} onClick={() => setView('SONGS')} />
                     <SidebarItem icon={Upload} label="WORKSPACE" active={currentView === 'WORKSPACE'} onClick={() => setView('WORKSPACE')} />
                     <SidebarItem icon={FileText} label="RESOURCES" active={currentView === 'RESOURCES'} onClick={() => setView('RESOURCES')} />
@@ -95,6 +100,8 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                     <SidebarItem icon={MessageCircle} label="SUPPORT" active={currentView === 'SUPPORT'} onClick={() => setView('SUPPORT')} />
                 </nav>
 
+                {/* --- DARK THEME BUTTON REMOVED FROM HERE --- */}
+
                 <div className="pt-8 border-t border-slate-100">
                     <SidebarItem icon={LogOut} label="LOGOUT" onClick={onLogout} />
                 </div>
@@ -102,8 +109,6 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
 
             {/* --- MAIN CONTENT --- */}
             <main className="flex-1 ml-72 p-12 max-w-7xl mx-auto w-full relative">
-
-                {/* Fixed Header: White background, Slate text */}
                 <header className="flex justify-between items-center mb-12 bg-white p-8 rounded-[3rem] border border-slate-200 shadow-sm">
                     <div className="flex items-center gap-6">
                         <div className="relative w-20 h-20 rounded-full bg-slate-50 border-4 border-white shadow-xl flex items-center justify-center overflow-hidden">
@@ -114,13 +119,13 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                                 {currentView.includes('REPORTS') ? 'Analytics & Recovery' : 'Artist Management'}
                             </h2>
                             <h1 className="text-4xl font-black text-slate-900 tracking-tighter uppercase mt-1 leading-none">
-                                {currentView.replace('_', ' ')}
+                                {/* HEADER LABEL UPDATED TO MUSIC LABEL / ARTIST */}
+                                {currentView === 'OVERVIEW' ? 'Music Label / Artist' : currentView.replace('_', ' ')}
                             </h1>
                         </div>
                     </div>
 
                     <div className="flex gap-4 items-center">
-                        {/* Search Input: bg-slate-50 and text-slate-900 */}
                         <div className="bg-slate-50 hidden lg:flex items-center px-6 py-3 rounded-2xl border border-slate-200 focus-within:border-indigo-500 transition-all">
                             <Search size={18} className="text-slate-400 mr-3" />
                             <input
@@ -137,7 +142,6 @@ export const Layout = ({ children, setView, currentView, onLogout }: LayoutProps
                     </div>
                 </header>
 
-                {/* This is where your StatsGrid and SongCatalog appear */}
                 <div className="animate-in fade-in duration-700">
                     {children}
                 </div>
