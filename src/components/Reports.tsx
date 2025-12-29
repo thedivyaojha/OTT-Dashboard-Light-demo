@@ -1,6 +1,6 @@
 import React from 'react';
 import { Download, Music, User, Disc, TrendingUp, Filter } from 'lucide-react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Legend } from 'recharts';
 import { SONGS } from '../data/songs.ts';
 
 const CRBT_DATA = [
@@ -54,10 +54,24 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
 
                     <div className="h-[450px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
-                            <BarChart data={CRBT_DATA} barGap={12}>
+                            <BarChart data={CRBT_DATA} barGap={12} margin={{ bottom: 20 }}>
                                 <CartesianGrid strokeDasharray="0 0" stroke="#f1f5f9" vertical={false} />
-                                <XAxis dataKey="name" stroke="#94a3b8" fontSize={10} tick={{fontWeight: '900'}} axisLine={false} tickLine={false} dy={20} />
-                                <YAxis stroke="#94a3b8" fontSize={10} tick={{fontWeight: '900'}} axisLine={false} tickLine={false} />
+                                <XAxis
+                                    dataKey="name"
+                                    stroke="#94a3b8"
+                                    fontSize={10}
+                                    tick={{fontWeight: '900', fill: '#0f172a'}}
+                                    axisLine={false}
+                                    tickLine={false}
+                                    dy={10}
+                                />
+                                <YAxis
+                                    stroke="#94a3b8"
+                                    fontSize={10}
+                                    tick={{fontWeight: '900', fill: '#0f172a'}}
+                                    axisLine={false}
+                                    tickLine={false}
+                                />
                                 <Tooltip
                                     cursor={{fill: '#f8fafc'}}
                                     content={({ active, payload }) => {
@@ -75,17 +89,31 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
                                         return null;
                                     }}
                                 />
-                                <Bar dataKey="jio" stackId="a" fill="#6366f1" barSize={40} />
-                                <Bar dataKey="airtel" stackId="a" fill="#ef4444" />
-                                <Bar dataKey="vi" stackId="a" fill="#eab308" radius={[8, 8, 0, 0]} />
+
+                                {/* LEGEND ADDED HERE */}
+                                <Legend
+                                    verticalAlign="bottom"
+                                    align="center"
+                                    iconType="circle"
+                                    iconSize={10}
+                                    wrapperStyle={{ paddingTop: '30px' }}
+                                    formatter={(value) => (
+                                        <span className="text-[11px] font-black text-slate-900 uppercase tracking-widest px-2">
+                                            {value}
+                                        </span>
+                                    )}
+                                />
+
+                                <Bar dataKey="jio" name="Jio Tunes" stackId="a" fill="#6366f1" barSize={40} />
+                                <Bar dataKey="airtel" name="Airtel" stackId="a" fill="#ef4444" />
+                                <Bar dataKey="vi" name="Vi" stackId="a" fill="#eab308" radius={[8, 8, 0, 0]} />
                             </BarChart>
                         </ResponsiveContainer>
                     </div>
                 </div>
             ) : (
-                /* DSP VIEW: RESTORED BENTO SECTIONS */
+                /* DSP VIEW */
                 <div className="space-y-10">
-                    {/* FULL WIDTH: TOP TRACKS */}
                     <ReportBentoList
                         title="Top Track Performance"
                         icon={<Music size={24}/>}
@@ -94,7 +122,6 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
                     />
 
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
-                        {/* ARTIST WISE */}
                         <ReportBentoList
                             title="Artist Performance"
                             icon={<User size={24}/>}
@@ -105,7 +132,6 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
                                 {label: 'Anupam Roy', val: '₹2.1L'},
                             ]}
                         />
-                        {/* ALBUM WISE */}
                         <ReportBentoList
                             title="Album Rankings"
                             icon={<Disc size={24}/>}
@@ -123,6 +149,7 @@ export const Reports = ({ type }: { type: 'CRBT' | 'DSP' }) => {
     );
 };
 
+/* SUPPORTING COMPONENTS */
 const StatCard = ({ label, value, growth }: any) => (
     <div className="bg-white p-8 rounded-[2.5rem] border border-slate-100 shadow-sm hover:border-indigo-500/20 transition-all">
         <p className="text-[10px] font-black text-slate-400 uppercase tracking-[0.2em] mb-2">{label}</p>
